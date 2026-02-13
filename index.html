@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hue & Home | Premium Paint & Decor</title>
+    <link rel="stylesheet" href="style.css">
+        :root {
+            --primary: #2d3436;
+            --accent: #0984e3;
+            --light: #f5f6fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: var(--light);
+            color: var(--primary);
+        }
+
+        header {
+            background: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--accent); }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=1000&q=80');
+            background-size: cover;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .container { padding: 2rem 5%; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+
+        .product-card:hover { transform: translateY(-5px); }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: #eee;
+            border-radius: 4px;
+            object-fit: cover;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        footer { text-align: center; padding: 2rem; background: var(--primary); color: white; margin-top: 2rem; }
+    
+</head>
+<body>
+
+<header>
+    <div class="logo">HUE & HOME</div>
+    <nav>Shop | Gallery | Contact</nav>
+</header>
+
+<section class="hero">
+    <h1>Color Your World</h1>
+    <p>Premium paints and artisan decor for your sanctuary.</p>
+</section>
+
+<section class="container" style="background: #fff; margin-bottom: 2rem; border-radius: 8px; padding: 2rem;">
+    <h2>Paint Calculator</h2>
+    <p>Enter your wall details to see how much paint you need.</p>
+    
+    <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: flex-end;">
+        <div>
+            <label>Wall Length (ft)</label><br>
+            <input type="number" id="length" value="10" style="padding: 8px; border: 1px solid #ccc;">
+        </div>
+        <div>
+            <label>Wall Height (ft)</label><br>
+            <input type="number" id="height" value="8" style="padding: 8px; border: 1px solid #ccc;">
+        </div>
+        <div>
+            <label>Number of Coats</label><br>
+            <select id="coats" style="padding: 8px; border: 1px solid #ccc;">
+                <option value="1">1 Coat</option>
+                <option value="2" selected>2 Coats</option>
+            </select>
+        </div>
+        <button onclick="calculatePaint()" class="btn" style="border: none; cursor: pointer;">Calculate</button>
+    </div>
+
+    <h3 id="result" style="margin-top: 20px; color: #0984e3;">Total Needed: 0.5 Gallons</h3>
+</section>
+
+<section class="container" style="background: #2d3436; color: white; border-radius: 8px; margin-top: 2rem;">
+    <h2>Instant Palette Designer</h2>
+    <p>Click to discover a professional color scheme for your room.</p>
+    
+    <div id="palette-display" style="display: flex; gap: 10px; margin-bottom: 20px;">
+        <div id="color1" style="flex: 1; height: 100px; border-radius: 5px; background: #3498db; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">Wall</div>
+        <div id="color2" style="flex: 1; height: 100px; border-radius: 5px; background: #ecf0f1; display: flex; align-items: center; justify-content: center; color: #333; font-weight: bold;">Trim</div>
+        <div id="color3" style="flex: 1; height: 100px; border-radius: 5px; background: #e67e22; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">Accent</div>
+    </div>
+    
+    <button onclick="generatePalette()" class="btn" style="background: #fff; color: #2d3436; border: none; cursor: pointer;">Generate New Scheme</button>
+</section>
+
+<script>
+const paintSchemes = [
+    {wall: '#556B2F', trim: '#F5F5DC', accent: '#8B4513'}, // Olive & Cream
+    {wall: '#4682B4', trim: '#FFFFFF', accent: '#FFD700'}, // Steel Blue & Gold
+    {wall: '#708090', trim: '#E1E1E1', accent: '#FF6347'}, // Slate & Tomato
+    {wall: '#E6E6FA', trim: '#FFFFFF', accent: '#4B0082'}  // Lavender & Indigo
+];
+
+function generatePalette() {
+    const scheme = paintSchemes[Math.floor(Math.random() * paintSchemes.length)];
+    document.getElementById('color1').style.backgroundColor = scheme.wall;
+    document.getElementById('color2').style.backgroundColor = scheme.trim;
+    document.getElementById('color3').style.backgroundColor = scheme.accent;
+}
+</script>
+
+<script>
+function calculatePaint() {
+    const length = document.getElementById('length').value;
+    const height = document.getElementById('height').value;
+    const coats = document.getElementById('coats').value;
+    
+    // 350 sq ft is the average coverage for a standard gallon
+    const coveragePerGallon = 350;
+    const totalSqFt = (length * height) * coats;
+    const gallonsNeeded = (totalSqFt / coveragePerGallon).toFixed(1);
+    
+    document.getElementById('result').innerText = `Total Needed: ${gallonsNeeded} Gallons`;
+}
+</script>
+
+<div class="container">
+    <h2>Featured Products</h2>
+    <div class="grid">
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1562184552-997c461abbe6?auto=format&fit=crop&w=400&q=80" alt="Paint" class="product-image">
+            <h3>Midnight Velvet Blue</h3>
+            <p>Interior Matte Finish</p>
+            <p><strong>$45.00</strong></p>
+            <a href="#" class="btn">Add to Cart</a>
+        </div>
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=400&q=80" alt="Decor" class="product-image">
+            <h3>Minimalist Wall Art</h3>
+            <p>Abstract Series #4</p>
+            <p><strong>$120.00</strong></p>
+            <a href="#" class="btn">Add to Cart</a>
+        </div>
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1525909002-1b05e0c869d8?auto=format&fit=crop&w=400&q=80" alt="Brush" class="product-image">
+            <h3>Pro-Series Brush Set</h3>
+            <p>Synthetic Soft Bristles</p>
+            <p><strong>$29.99</strong></p>
+            <a href="#" class="btn">Add to Cart</a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 Hue & Home Decor. All rights reserved.</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
