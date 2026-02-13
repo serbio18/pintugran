@@ -1,15 +1,160 @@
-/* style.css */
 :root {
-    --primary: #2d3436;
-    --accent: #0984e3;
-    --light: #f5f6fa;
+    --brand-blue: #004a99;
+    --accent-red: #e31e24;
+    --dark: #333333;
+    --light: #f8f9fa;
+    --white: #ffffff;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
-    background-color: var(--light);
-    color: var(--primary);
+    color: var(--dark);
+    background-color: var(--white);
 }
 
-/* ... paste the rest of the CSS here ... */
+/* Header & Nav */
+.top-bar {
+    background: var(--brand-blue);
+    color: white;
+    text-align: center;
+    padding: 8px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    border-bottom: 3px solid var(--brand-blue);
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 1000;
+}
+
+.logo { font-size: 28px; font-weight: 900; color: var(--brand-blue); }
+
+nav a {
+    text-decoration: none;
+    color: var(--dark);
+    font-weight: bold;
+    margin: 0 15px;
+    font-size: 14px;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1525909002-1b05e0c869d8?auto=format&fit=crop&w=1200&q=80');
+    background-size: cover;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    color: white;
+    padding: 0 5%;
+}
+
+.hero h1 { font-size: 48px; line-height: 1; margin-bottom: 10px; }
+
+/* Product Grid */
+.container { padding: 40px 5%; }
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.product-card {
+    border: 1px solid #eee;
+    position: relative;
+    transition: 0.3s;
+}
+
+.product-card:hover { box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+
+.img-container img { width: 100%; height: 250px; object-fit: cover; }
+
+.badge-sale {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--accent-red);
+    color: white;
+    padding: 5px 12px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.product-info { padding: 20px; text-align: center; }
+.category { color: #999; font-size: 12px; text-transform: uppercase; }
+.price { font-size: 20px; font-weight: bold; color: var(--brand-blue); }
+.old-price { text-decoration: line-through; color: #999; font-size: 14px; }
+
+.btn-buy {
+    width: 100%;
+    background: var(--brand-blue);
+    color: white;
+    border: none;
+    padding: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+/* Calculator Section */
+.calculator-box {
+    background: var(--light);
+    padding: 40px;
+    margin-top: 50px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.calc-inputs input { padding: 10px; margin: 5px; border: 1px solid #ddd; width: 150px; }
+.calc-inputs button { background: var(--dark); color: white; padding: 10px 20px; border: none; cursor: pointer; }
+
+footer { background: #111; color: white; padding: 50px 5% 20px; margin-top: 50px; }
+.footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; }
+.copyright { text-align: center; margin-top: 40px; border-top: 1px solid #333; padding-top: 20px; font-size: 12px; }
+
+/* Store Locator Layout */
+.store-locator-container { margin-top: 60px; }
+
+.locator-wrapper {
+    display: flex;
+    height: 500px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.store-list {
+    flex: 1;
+    overflow-y: auto;
+    background: var(--light);
+    border-right: 1px solid #ddd;
+}
+
+#map {
+    flex: 2; /* Map takes up more space */
+    height: 100%;
+}
+
+.store-item {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.store-item:hover { background: #e9ecef; }
+.store-item h4 { color: var(--brand-blue); margin: 0 0 5px 0; }
+.store-item p { margin: 0; font-size: 14px; color: #666; }
+.store-item span { font-size: 12px; font-weight: bold; color: var(--accent-red); }
+
+@media (max-width: 768px) {
+    .locator-wrapper { flex-direction: column; height: 800px; }
+    .store-list { flex: none; height: 300px; }
+}
