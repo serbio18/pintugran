@@ -124,6 +124,17 @@ function addToCart() {
     }, 3000);
 }
 
+// Trigger a small attention-getter for WhatsApp after 5 seconds
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        const waButton = document.querySelector('.whatsapp-float');
+        if (waButton) {
+            waButton.style.transform = "scale(1.2)";
+            setTimeout(() => { waButton.style.transform = "scale(1)"; }, 300);
+        }
+    }, 5000);
+});
+
 // Smooth scrolling for internal links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -133,3 +144,4 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         });
     });
 });
+

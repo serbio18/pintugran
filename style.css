@@ -158,3 +158,45 @@ footer { background: #111; color: white; padding: 50px 5% 20px; margin-top: 50px
     .locator-wrapper { flex-direction: column; height: 800px; }
     .store-list { flex: none; height: 300px; }
 }
+
+/* WhatsApp Floating Button */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25d366;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 9999;
+    transition: transform 0.3s ease;
+}
+
+.whatsapp-float img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    background-color: #128c7e;
+    color: white;
+}
+
+/* Subtle pulse animation for the chat button */
+@keyframes pulse-green {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+.whatsapp-float {
+    animation: pulse-green 2s infinite;
+}
