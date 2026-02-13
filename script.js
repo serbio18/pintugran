@@ -133,7 +133,7 @@ window.addEventListener('load', () => {
             setTimeout(() => { waButton.style.transform = "scale(1)"; }, 300);
         }
     }, 5000);
-});
+})
 
 // Smooth scrolling for internal links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
