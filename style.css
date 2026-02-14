@@ -1,5 +1,5 @@
 :root {
-    --brand-blue: #004a99;
+    --brand-orange: #004a99;
     --accent-red: #e31e24;
     --dark: #333333;
     --light: #f8f9fa;
@@ -15,7 +15,7 @@ body {
 
 /* Header & Nav */
 .top-bar {
-    background: orange;
+    --brand-orange: orange;
     color: white;
     text-align: center;
     padding: 8px;
