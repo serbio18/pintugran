@@ -122,6 +122,34 @@
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Chat">
     <span>¿Necesitas ayuda?</span>
 </a>
+<div id="search-overlay" class="search-overlay">
+    <span class="close-search" onclick="toggleSearch()">&times;</span>
+    <div class="search-content">
+        <input type="text" id="search-input" placeholder="¿Qué estás buscando? (Ej: Vinilo Tipo 1, Brochas...)" onkeyup="liveSearch()">
+        <div id="search-results"></div>
+    </div>
+</div>
+<div id="cart-sidebar" class="cart-sidebar">
+    <div class="cart-header">
+        <h3>Tu Carrito</h3>
+        <span class="close-cart" onclick="toggleCart()">&times;</span>
+    </div>
+    
+    <div id="cart-items-container" class="cart-items">
+        <p class="empty-msg">Tu carrito está vacío.</p>
+    </div>
+
+    <div class="cart-footer">
+        <div class="cart-total">
+            <span>Total:</span>
+            <span id="cart-total-price">$0</span>
+        </div>
+        <button class="btn-checkout">INICIAR COMPRA</button>
+        <button class="btn-continue" onclick="toggleCart()">Continuar Comprando</button>
+    </div>
+</div>
+
+<div id="cart-overlay" class="cart-overlay" onclick="toggleCart()"></div>
 </body>
 
 </html>

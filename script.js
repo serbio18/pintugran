@@ -98,30 +98,96 @@ function generatePalette() {
 }
 
 // --- 4. SHOPPING & UI INTERACTIONS ---
-function addToCart() {
-    // This replicates the "Tito Pabón" experience of a toast notification
-    const notification = document.createElement('div');
-    notification.innerText = "✓ Producto añadido al carrito";
-    notification.style.cssText = `
-        position: fixed;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #27ae60;
-        color: white;
-        padding: 12px 24px;
-        border-radius: 4px;
-        font-weight: bold;
-        z-index: 9999;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    `;
+let cart = [];
+
+function toggleCart() {
+    document.getElementById('cart-sidebar').classList.toggle('active');
+    document.getElementById('cart-overlay').classList.toggle('active');
+}
+
+// Update the Cart Icon link in the header to open the cart
+document.querySelector('.cart-link').addEventListener('click', toggleCart);
+
+function addToCart(name, price) {
+    const existingItem = cart.find(item => item.name === name);
     
-    document.body.appendChild(notification);
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({ name, price, quantity: 1 });
+    }
     
-    // Remove notification after 3 seconds
-    setTimeout(() => {
-        notification.remove();
-    }, 3000);
+    updateCartUI();
+    // Open the cart automatically when someone adds an item
+    if (!document.getElementById('cart-sidebar').classList.contains('active')) {
+        toggleCart();
+    }
+}
+
+function updateCartUI() {
+    const container = document.getElementById('cart-items-container');
+    const totalElement = document.getElementById('cart-total-price');
+    const cartCount = document.querySelector('.cart-link'); // The 🛒 (0) in header
+    
+    container.innerHTML = '';
+    let total = 0;
+    let count = 0;
+
+    cart.forEach(item => {
+        total += item.price * item.quantity;
+        count += item.quantity;
+        
+        container.innerHTML += `
+            <div class="cart-item">
+                <div>
+                    <strong>${item.name}</strong><br>
+                    <small>${item.quantity} x $${item.price.toLocaleString()}</small>
+                </div>
+                <button onclick="removeFromCart('${item.name}')" style="border:none; background:none; color:red; cursor:pointer;">✕</button>
+            </div>
+        `;
+    });
+
+    totalElement.innerText = `$${total.toLocaleString()}`;
+    cartCount.innerText = `🛒 (${count})`;
+    
+    if (cart.length === 0) {
+        container.innerHTML = '<p class="empty-msg">Tu carrito está vacío.</p>';
+    }
+}
+
+function removeFromCart(name) {
+    cart = cart.filter(item => item.name !== name);
+    updateCartUI();
+}
+
+// Toggle Search Overlay
+function toggleSearch() {
+    const overlay = document.getElementById('search-overlay');
+    if (overlay.style.display === "block") {
+        overlay.style.display = "none";
+    } else {
+        overlay.style.display = "block";
+        document.getElementById('search-input').focus();
+    }
+}
+
+// Attach event listener to the Search span in header
+document.querySelector('.search-link').addEventListener('click', toggleSearch);
+
+// Basic Search Logic
+function liveSearch() {
+    let input = document.getElementById('search-input').value.toLowerCase();
+    let cards = document.getElementsByClassName('product-card');
+    
+    for (let i = 0; i < cards.length; i++) {
+        let title = cards[i].querySelector('h3').innerText.toLowerCase();
+        if (title.includes(input)) {
+            cards[i].style.display = "";
+        } else {
+            cards[i].style.display = "none";
+        }
+    }
 }
 
 // Trigger a small attention-getter for WhatsApp after 5 seconds
