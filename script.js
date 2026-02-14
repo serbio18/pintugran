@@ -156,6 +156,40 @@ function updateCartUI() {
     }
 }
 
+function checkoutWhatsApp() {
+    if (cart.length === 0) {
+        alert("Tu carrito está vacío.");
+        return;
+    }
+
+    // 1. Enter your WhatsApp number (International format: CountryCodeNumber)
+    // For Colombia, use 57 followed by the number
+    const myNumber = "573001234567"; 
+
+    // 2. Format the message
+    let message = "🎨 *NUEVO PEDIDO - TITO STYLE*\n\n";
+    message += "Hola, me gustaría comprar los siguientes productos:\n\n";
+
+    let total = 0;
+    cart.forEach(item => {
+        const subtotal = item.price * item.quantity;
+        message += `• *${item.name}* x${item.quantity} - $${subtotal.toLocaleString()}\n`;
+        total += subtotal;
+    });
+
+    message += `\n💰 *TOTAL A PAGAR: $${total.toLocaleString()}*`;
+    message += "\n\n📍 _Por favor, confírmame disponibilidad y métodos de entrega._";
+
+    // 3. URL Encode the message to make it web-safe
+    const encodedMessage = encodeURIComponent(message);
+
+    // 4. Create the final link and open it
+    const whatsappURL = `https://wa.me/${myNumber}?text=${encodedMessage}`;
+    
+    // Open in a new tab
+    window.open(whatsappURL, '_blank');
+}
+
 function removeFromCart(name) {
     cart = cart.filter(item => item.name !== name);
     updateCartUI();
