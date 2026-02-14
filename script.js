@@ -164,7 +164,7 @@ function checkoutWhatsApp() {
 
     // 1. Enter your WhatsApp number (International format: CountryCodeNumber)
     // For Colombia, use 57 followed by the number
-    const myNumber = "573001234567"; 
+    const myNumber = "573144502963"; 
 
     // 2. Format the message
     let message = "🎨 *NUEVO PEDIDO - TITO STYLE*\n\n";
