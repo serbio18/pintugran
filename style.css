@@ -95,7 +95,7 @@ nav a {
 .btn-buy {
     width: 100%;
     background: var(--brand-blue);
-    color: white;
+    color: blue;
     border: none;
     padding: 12px;
     font-weight: bold;
