@@ -15,7 +15,7 @@ body {
 
 /* Header & Nav */
 .top-bar {
-    background: var(--brand-blue);
+    background: var(orange);
     color: white;
     text-align: center;
     padding: 8px;
