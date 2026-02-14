@@ -214,3 +214,66 @@ footer { background: #111; color: white; padding: 50px 5% 20px; margin-top: 50px
 .whatsapp-float {
     animation: pulse-green 2s infinite;
 }
+
+/* Gallery Layout */
+.gallery-container {
+    display: flex;
+    padding: 40px 5%;
+    gap: 30px;
+}
+
+.filter-sidebar {
+    flex: 1;
+    min-width: 250px;
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 20px;
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+}
+
+.gallery-content {
+    flex: 3;
+}
+
+.gallery-header {
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--brand-blue);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 10px;
+}
+
+.filter-group {
+    margin-bottom: 25px;
+}
+
+.filter-group h4 {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: var(--brand-blue);
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.filter-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+/* Mobile Responsive Gallery */
+@media (max-width: 900px) {
+    .gallery-container {
+        flex-direction: column;
+    }
+    .filter-sidebar {
+        position: static;
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
