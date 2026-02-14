@@ -198,6 +198,7 @@ function removeFromCart(name) {
 // Toggle Search Overlay
 function toggleSearch() {
     const overlay = document.getElementById('search-overlay');
+    // We check both "block" and empty string because CSS might start as empty
     if (overlay.style.display === "block") {
         overlay.style.display = "none";
     } else {
@@ -205,6 +206,15 @@ function toggleSearch() {
         document.getElementById('search-input').focus();
     }
 }
+
+// Attach listeners safely
+document.addEventListener('DOMContentLoaded', () => {
+    const searchBtn = document.querySelector('.search-link');
+    const cartBtn = document.querySelector('.cart-link');
+
+    if (searchBtn) searchBtn.addEventListener('click', toggleSearch);
+    if (cartBtn) cartBtn.addEventListener('click', toggleCart);
+});
 
 // Attach event listener to the Search span in header
 document.querySelector('.search-link').addEventListener('click', toggleSearch);
