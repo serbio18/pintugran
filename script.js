@@ -245,6 +245,74 @@ window.addEventListener('load', () => {
     }, 5000);
 })
 
+function checkoutPayU() {
+    if (cart.length === 0) {
+        alert("Tu carrito está vacío.");
+        return;
+    }
+
+    // 1. Calculate totals
+    let total = 0;
+    let description = "Compra Tito Style: ";
+    cart.forEach(item => {
+        total += item.price * item.quantity;
+        description += `${item.name} (x${item.quantity}), `;
+    });
+
+    // 2. PayU Configuration (Replace these with your real PayU account data)
+    const payuData = {
+        merchantId: "508029", // Your ID
+        accountId: "512321",  // Your ID
+        apiKey: "4Vj8eK4rloUd272L48hsrarnUA", // Your Key
+        referenceCode: "TS-" + Date.now(), // Unique code for this sale
+        amount: total,
+        currency: "COP",
+        signature: "", // This needs to be encrypted for security
+        test: 1, // 1 for Testing, 0 for Real Money
+        buyerEmail: "cliente@email.com",
+        responseUrl: "https://yourwebsite.com/response.html",
+        confirmationUrl: "https://yourwebsite.com/confirmation"
+    };
+
+    // 3. Simple Signature Generation (For Testing)
+    // Note: In production, signatures should be generated on a server for security.
+    const signatureRaw = `${payuData.apiKey}~${payuData.merchantId}~${payuData.referenceCode}~${payuData.amount}~${payuData.currency}`;
+    // Use an MD5 library or a simple hash for the signature
+    payuData.signature = md5(signatureRaw); 
+
+    // 4. Create a hidden form and submit it to PayU
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = 'https://sandbox.checkout.payulatam.com/checkout/webcheckout.cgi'; // Testing URL
+
+    const fields = {
+        merchantId: payuData.merchantId,
+        accountId: payuData.accountId,
+        description: description,
+        referenceCode: payuData.referenceCode,
+        amount: payuData.amount,
+        tax: 0,
+        taxReturnBase: 0,
+        currency: payuData.currency,
+        signature: payuData.signature,
+        test: payuData.test,
+        buyerEmail: payuData.buyerEmail,
+        responseUrl: payuData.responseUrl,
+        confirmationUrl: payuData.confirmationUrl
+    };
+
+    for (const key in fields) {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = fields[key];
+        form.appendChild(input);
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+}
+
 // Smooth scrolling for internal links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
